@@ -1,0 +1,41 @@
+name: playground
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: 'Operating system to run'
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+        - ubuntu-latest
+        - windows-latest
+      run_cmd:
+        description: 'Command to execute'
+        required: true 
+        type: string
+      run_shell:
+        description: 'run shell'
+        required: true 
+        type: choice
+        default: 'bash'
+        options:
+        - bash
+        - python
+        - sh
+        - cmd
+        - pwsh
+        - powershell
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
+
+jobs:
+  execute-your-task:
+    runs-on: ${{ inputs.os }} 
+    steps:
+      - name: Run the command
+        shell: ${{ inputs.run_shell }}
+        run: ${{ inputs.run_cmd }} 
