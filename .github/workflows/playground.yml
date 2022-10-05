@@ -22,11 +22,11 @@ on:
         default: 'bash'
         options:
         - bash
-        - python
-        - sh
-        - cmd
-        - pwsh
-        - powershell
+        # - python
+        # - sh
+        # - cmd
+        # - pwsh
+        # - powershell
 
 jobs:
   execute-your-task:
@@ -41,5 +41,6 @@ jobs:
           run_shell: ${{ github.event.inputs.run_shell }}
           run_cmd: ${{ github.event.inputs.run_cmd }}
       - name: Run the command
-        shell: ${{ github.event.inputs.run_shell }}
+        # shell: ${{ github.event.inputs.run_shell }}
+        shell: bash
         run: ${{ github.event.inputs.run_cmd }} 
