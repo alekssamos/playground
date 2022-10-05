@@ -30,8 +30,8 @@ on:
 
 jobs:
   execute-your-task:
-    runs-on: ${{ inputs.os }} 
+    runs-on: ${{ github.event.inputs.os }} 
     steps:
       - name: Run the command
-        shell: ${{ inputs.run_shell }}
-        run: ${{ inputs.run_cmd }} 
+        shell: ${{ github.event.inputs.run_shell }}
+        run: ${{ github.event.inputs.run_cmd }} 
