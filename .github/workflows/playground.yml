@@ -32,6 +32,14 @@ jobs:
   execute-your-task:
     runs-on: ${{ github.event.inputs.os }} 
     steps:
+      - name: Show the command
+        shell: bash
+        run: |
+          echo shell: $run_shell
+          echo command: $run_cmd
+        env:
+          run_shell: ${{ github.event.inputs.run_shell }}
+          run_cmd: ${{ github.event.inputs.run_cmd }}
       - name: Run the command
         shell: ${{ github.event.inputs.run_shell }}
         run: ${{ github.event.inputs.run_cmd }} 
