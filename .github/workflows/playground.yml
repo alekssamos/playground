@@ -51,22 +51,22 @@ jobs:
           run_shell: ${{ github.event.inputs.run_shell }}
           run_cmd: ${{ github.event.inputs.run_cmd }}
     - shell: bash
-      if: ${{ github.event.inputs.run_shell == "bash" }}
+      if: ${{ github.event.inputs.run_shell == 'bash' }}
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: python
-      if: ${{ github.event.inputs.run_shell == "python" }}
+      if: ${{ github.event.inputs.run_shell == 'python' }}
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: sh
-      if: ${{ github.event.inputs.run_shell == "sh" }}
+      if: ${{ github.event.inputs.run_shell == 'sh' }}
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: cmd
-      if: ${{ github.event.inputs.run_shell == "cmd" }}
+      if: ${{ github.event.inputs.run_shell == 'cmd' }}
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: pwsh
-      if: ${{ github.event.inputs.run_shell == "pwsh" }}
+      if: ${{ github.event.inputs.run_shell == 'pwsh' }}
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: powershell
-      if: ${{ github.event.inputs.run_shell == "powershell" }}
+      if: ${{ github.event.inputs.run_shell == 'powershell' }}
       run: ${{ github.event.inputs.run_cmd }} 
     - if: ${{ github.event.inputs.artifacts_needed }}
       uses: actions/upload-artifact@v3
