@@ -14,7 +14,7 @@ on:
       run_cmd:
         description: 'Command to execute'
         required: true 
-        type: string
+        type: text 
       run_shell:
         description: 'run shell'
         required: true 
@@ -22,25 +22,55 @@ on:
         default: 'bash'
         options:
         - bash
-        # - python
-        # - sh
-        # - cmd
-        # - pwsh
-        # - powershell
+        - python
+        - sh
+        - cmd
+        - pwsh
+        - powershell
+      artifacts_needed:
+        description: 'upload artifacts?'
+        required: false 
+        type: boolean 
+        default: false
+      artifact_path:
+        description: 'Artifact path (if checked)'
+        required: false
+        type: text 
+
 
 jobs:
   execute-your-task:
     runs-on: ${{ github.event.inputs.os }} 
     steps:
-      - name: Show the command
-        shell: bash
-        run: |
-          echo shell: $run_shell
-          echo command: $run_cmd
-        env:
+    - name: Show the command
+      shell: bash
+      run: |
+        echo shell: $run_shell
+        echo command: $run_cmd
+      env:
           run_shell: ${{ github.event.inputs.run_shell }}
           run_cmd: ${{ github.event.inputs.run_cmd }}
-      - name: Run the command
-        # shell: ${{ github.event.inputs.run_shell }}
-        shell: bash
-        run: ${{ github.event.inputs.run_cmd }} 
+    - shell: bash
+      if: ${{ github.event.inputs.run_shell == "bash" }}
+      run: ${{ github.event.inputs.run_cmd }} 
+    - shell: python
+      if: ${{ github.event.inputs.run_shell == "python" }}
+      run: ${{ github.event.inputs.run_cmd }} 
+    - shell: sh
+      if: ${{ github.event.inputs.run_shell == "sh" }}
+      run: ${{ github.event.inputs.run_cmd }} 
+    - shell: cmd
+      if: ${{ github.event.inputs.run_shell == "cmd" }}
+      run: ${{ github.event.inputs.run_cmd }} 
+    - shell: pwsh
+      if: ${{ github.event.inputs.run_shell == "pwsh" }}
+      run: ${{ github.event.inputs.run_cmd }} 
+    - shell: powershell
+      if: ${{ github.event.inputs.run_shell == "powershell" }}
+      run: ${{ github.event.inputs.run_cmd }} 
+    - if: ${{ github.event.inputs.artifacts_needed }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifacts_for_${{ github.event.inputs.os }}_${{ github.run_id }}
+        path: ${{ github.event.inputs.artifact_path }}
+
