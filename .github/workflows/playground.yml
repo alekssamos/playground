@@ -52,21 +52,27 @@ jobs:
           run_cmd: ${{ github.event.inputs.run_cmd }}
     - shell: bash
       if: ${{ github.event.inputs.run_shell == 'bash' }}
+      continue-on-error: true
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: python
       if: ${{ github.event.inputs.run_shell == 'python' }}
+      continue-on-error: true
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: sh
       if: ${{ github.event.inputs.run_shell == 'sh' }}
+      continue-on-error: true
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: cmd
       if: ${{ github.event.inputs.run_shell == 'cmd' }}
+      continue-on-error: true
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: pwsh
       if: ${{ github.event.inputs.run_shell == 'pwsh' }}
+      continue-on-error: true
       run: ${{ github.event.inputs.run_cmd }} 
     - shell: powershell
       if: ${{ github.event.inputs.run_shell == 'powershell' }}
+      continue-on-error: true
       run: ${{ github.event.inputs.run_cmd }} 
     - if: ${{ github.event.inputs.artifacts_needed }}
       uses: actions/upload-artifact@v3
